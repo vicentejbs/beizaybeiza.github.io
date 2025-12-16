@@ -4,13 +4,13 @@ import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 
 export const ContactCTA = () => {
   return (
-    <section className="py-20 bg-hero hero-pattern">
+    <section className="py-20" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-hero mb-4">
             ¿Listo para tu próximo proyecto?
           </h2>
-          <p className="text-xl text-primary-foreground/70 mb-8">
+          <p className="text-xl text-hero-muted mb-8">
             Contáctanos hoy y obtén una cotización personalizada sin compromiso.
           </p>
           
@@ -26,7 +26,7 @@ export const ContactCTA = () => {
               </Button>
             </a>
             <a href="tel:+56978617592">
-              <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-lg px-8 h-14 w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-white/40 text-hero bg-white/10 hover:bg-white/20 font-semibold text-lg px-8 h-14 w-full sm:w-auto">
                 <Phone className="mr-2 h-5 w-5" />
                 +56 9 7861 7592
               </Button>
