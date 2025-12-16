@@ -2,6 +2,7 @@ import { Layout } from "@/components/Layout";
 import { Hero } from "@/components/Hero";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ProjectGallery } from "@/components/ProjectGallery";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
@@ -178,6 +179,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <ProjectGallery />
 
       <ContactCTA />
     </Layout>
