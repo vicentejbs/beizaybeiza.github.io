@@ -10,7 +10,6 @@ const navItems = [
   { name: "Servicios", path: "/servicios" },
   { name: "Aprende", path: "/aprende" },
   { name: "RSE", path: "/responsabilidad-social" },
-  { name: "Contacto", path: "/contacto" },
 ];
 
 export const Header = () => {
