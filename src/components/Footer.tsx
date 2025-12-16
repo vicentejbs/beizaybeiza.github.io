@@ -82,7 +82,7 @@ export const Footer = () => {
             {/* Social Links */}
             <div className="flex gap-3 mt-6">
               <a
-                href="https://www.instagram.com/beizaybeiza_ing/"
+                href="https://www.instagram.com/ingenieriabeiza"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-secondary hover:text-foreground transition-all"
