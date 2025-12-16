@@ -30,14 +30,14 @@ const SobreNosotros = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20 bg-hero hero-pattern">
+      <section className="py-20" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Sobre Nosotros</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-primary-foreground mt-2 mb-6">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6">
               Una Empresa Familiar con Valores Sólidos
             </h1>
-            <p className="text-xl text-primary-foreground/80">
+            <p className="text-xl text-hero-muted">
               Beiza y Beiza nace de la unión de experiencia, conocimiento técnico y 
               compromiso familiar. Somos especialistas en instalaciones eléctricas y de gas 
               con más de 20 años sirviendo a la Región Metropolitana.

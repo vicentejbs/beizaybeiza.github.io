@@ -29,14 +29,14 @@ const ResponsabilidadSocial = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20 bg-hero hero-pattern">
+      <section className="py-20" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <span className="text-secondary font-semibold text-sm uppercase tracking-wider">RSE</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-primary-foreground mt-2 mb-6">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6">
               Responsabilidad Social Empresarial
             </h1>
-            <p className="text-xl text-primary-foreground/80">
+            <p className="text-xl text-hero-muted">
               En Beiza y Beiza creemos que el éxito empresarial debe ir de la mano 
               con el compromiso social y ambiental. Trabajamos para generar un impacto 
               positivo en nuestra comunidad.
