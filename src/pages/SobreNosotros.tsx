@@ -1,6 +1,9 @@
 import { Layout } from "@/components/Layout";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Users, Target, Award, Linkedin, Mail } from "lucide-react";
+import fotoDiego from "@/assets/foto-diego.jpg";
+import fotoEnrique from "@/assets/foto-enrique.jpg";
+import fotoVicente from "@/assets/foto-vicente.jpg";
 
 const team = [
   {
@@ -9,6 +12,7 @@ const team = [
     description: "Especialista en proyectos de media y baja presión en gas natural y GLP. Experto en mediciones de monóxido, tramitación de sellos verdes y certificaciones TC6 ante la SEC. Más de 20 años de experiencia ejecutando redes de gas con soldadura plata según Decreto 66/2007.",
     email: "ebeizah@beizaybeiza.cl",
     linkedin: "https://linkedin.com/in/enrique-beiza-17b1786a",
+    image: fotoEnrique,
   },
   {
     name: "Diego Beiza Silva",
@@ -16,6 +20,7 @@ const team = [
     description: "Profesional técnico-práctico especializado en supervisión y mantenimiento de sistemas eléctricos de media y alta tensión. Experiencia en sectores minero, energético y construcción. Coordinación operativa en tiempo real mediante SCADA, gestión de proyectos electromecánicos.",
     email: "diegobeizas@beizaybeiza.cl",
     linkedin: "https://linkedin.com/in/diego-beiza-008b27183",
+    image: fotoDiego,
   },
   {
     name: "Vicente Beiza Silva",
@@ -23,6 +28,7 @@ const team = [
     description: "Estudiante de Ingeniería Civil Telemática en UTFSM. Apoyo en operaciones técnicas y desarrollo digital de la empresa. Experiencia en Python, JavaScript, SQL y sistemas de comunicación. Responsable de la presencia digital y marketing de Beiza y Beiza.",
     email: "vicentebeizas@beizaybeiza.cl",
     linkedin: "https://linkedin.com/in/vicentebeizas",
+    image: fotoVicente,
   },
 ];
 
@@ -103,10 +109,12 @@ const SobreNosotros = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {team.map((member) => (
               <div key={member.name} className="p-8 rounded-2xl bg-card border border-border hover:shadow-hover transition-all">
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 mx-auto">
-                  <span className="font-heading text-2xl font-bold text-primary">
-                    {member.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                  </span>
+                <div className="w-24 h-24 rounded-full overflow-hidden mb-6 mx-auto border-2 border-primary/20">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-foreground text-center mb-1">{member.name}</h3>
                 <p className="text-primary text-sm text-center font-medium mb-4">{member.role}</p>
