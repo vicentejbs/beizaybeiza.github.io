@@ -2,6 +2,7 @@ import { Layout } from "@/components/Layout";
 import { ContactCTA } from "@/components/ContactCTA";
 import { AnimatedSection } from "@/hooks/useScrollAnimation";
 import { Book, Zap, Flame, ShieldCheck, AlertTriangle } from "lucide-react";
+import heroBgAprende from "@/assets/hero-bg-aprende.jpg";
 
 const guides = [
   {
@@ -58,7 +59,12 @@ const Aprende = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+      <section className="py-20 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBgAprende})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-1/3 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
           <div className="absolute bottom-10 right-1/3 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
