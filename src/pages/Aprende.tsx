@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { ContactCTA } from "@/components/ContactCTA";
+import { AnimatedSection } from "@/hooks/useScrollAnimation";
 import { Book, Zap, Flame, ShieldCheck, AlertTriangle } from "lucide-react";
 
 const guides = [
@@ -57,14 +58,18 @@ const Aprende = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-1/3 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
+          <div className="absolute bottom-10 right-1/3 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
-            <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Centro de Aprendizaje</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6">
+            <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider animate-fade-in">Centro de Aprendizaje</span>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6 animate-slide-up">
               Aprende con Beiza y Beiza
             </h1>
-            <p className="text-xl text-hero-muted">
+            <p className="text-xl text-hero-muted animate-slide-up" style={{ animationDelay: "0.1s" }}>
               Compartimos nuestro conocimiento técnico para que puedas entender mejor 
               las normativas vigentes y tomar decisiones informadas sobre tus instalaciones.
             </p>
@@ -73,55 +78,63 @@ const Aprende = () => {
       </section>
 
       {/* Guides */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid gap-8">
-            {guides.map((guide) => (
-              <div key={guide.title} className="p-8 rounded-2xl bg-card border border-border hover:shadow-hover transition-all">
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-2/3">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <guide.icon className="h-5 w-5 text-primary" />
+            {guides.map((guide, index) => (
+              <AnimatedSection key={guide.title} animation={index % 2 === 0 ? "slide-left" : "slide-right"} delay={index * 0.1} duration={0.6}>
+                <div className="p-8 rounded-2xl bg-card border border-border hover:shadow-hover hover:border-primary/30 transition-all duration-500 group">
+                  <div className="flex flex-col lg:flex-row gap-8">
+                    <div className="lg:w-2/3">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                          <guide.icon className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                          {guide.category}
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                        {guide.category}
-                      </span>
+                      <h3 className="font-heading text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">{guide.title}</h3>
+                      <p className="text-muted-foreground text-lg">{guide.description}</p>
                     </div>
-                    <h3 className="font-heading text-2xl font-bold text-foreground mb-4">{guide.title}</h3>
-                    <p className="text-muted-foreground text-lg">{guide.description}</p>
-                  </div>
-                  <div className="lg:w-1/3 lg:border-l lg:border-border lg:pl-8">
-                    <h4 className="font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
-                      <Book className="h-4 w-4 text-primary" />
-                      Puntos Clave
-                    </h4>
-                    <ul className="space-y-3">
-                      {guide.tips.map((tip, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0" />
-                          {tip}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="lg:w-1/3 lg:border-l lg:border-border lg:pl-8">
+                      <h4 className="font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+                        <Book className="h-4 w-4 text-primary" />
+                        Puntos Clave
+                      </h4>
+                      <ul className="space-y-3">
+                        {guide.tips.map((tip, tipIndex) => (
+                          <li 
+                            key={tipIndex} 
+                            className="flex items-start gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300"
+                            style={{ transitionDelay: `${tipIndex * 50}ms` }}
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                            {tip}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* Disclaimer */}
-      <section className="py-12 bg-muted">
+      <section className="py-12 bg-muted overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-muted-foreground">
-              <strong className="text-foreground">Importante:</strong> Esta información es de carácter educativo. 
-              Para trabajos de instalación o reparación, siempre contrate a profesionales certificados. 
-              Las instalaciones eléctricas y de gas requieren conocimientos técnicos especializados.
-            </p>
-          </div>
+          <AnimatedSection animation="fade-up">
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-muted-foreground">
+                <strong className="text-foreground">Importante:</strong> Esta información es de carácter educativo. 
+                Para trabajos de instalación o reparación, siempre contrate a profesionales certificados. 
+                Las instalaciones eléctricas y de gas requieren conocimientos técnicos especializados.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
