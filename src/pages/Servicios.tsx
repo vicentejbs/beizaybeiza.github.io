@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { ContactCTA } from "@/components/ContactCTA";
+import { AnimatedSection } from "@/hooks/useScrollAnimation";
 import { 
   Zap, 
   Flame, 
@@ -86,14 +87,18 @@ const Servicios = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-1/4 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
-            <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Nuestros Servicios</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6">
+            <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider animate-fade-in">Nuestros Servicios</span>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-hero mt-2 mb-6 animate-slide-up">
               Soluciones Integrales en Electricidad y Gas
             </h1>
-            <p className="text-xl text-hero-muted">
+            <p className="text-xl text-hero-muted animate-slide-up" style={{ animationDelay: "0.1s" }}>
               Ofrecemos una amplia gama de servicios técnicos especializados, 
               desde instalaciones residenciales hasta proyectos industriales complejos. 
               Todos certificados y según normativa SEC vigente.
@@ -103,9 +108,9 @@ const Servicios = () => {
       </section>
 
       {/* Electric Services */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="mb-12">
+          <AnimatedSection animation="slide-left" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 <Zap className="h-6 w-6 text-primary" />
@@ -117,37 +122,43 @@ const Servicios = () => {
             <p className="text-muted-foreground max-w-2xl">
               Instalaciones eléctricas profesionales con certificación SEC para todo tipo de proyectos.
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {electricServices.map((service) => (
-              <div key={service.title} className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-hover transition-all">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <service.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-xl font-bold text-foreground mb-2">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.items.map((item) => (
-                        <span key={item} className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground">
-                          {item}
-                        </span>
-                      ))}
+            {electricServices.map((service, index) => (
+              <AnimatedSection key={service.title} animation="fade-up" delay={index * 0.1} duration={0.5}>
+                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                      <service.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
+                      <p className="text-muted-foreground mb-4">{service.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {service.items.map((item, i) => (
+                          <span 
+                            key={item} 
+                            className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground group-hover:bg-primary/10 group-hover:text-foreground transition-all duration-300"
+                            style={{ transitionDelay: `${i * 50}ms` }}
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* Gas Services */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-muted overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="mb-12">
+          <AnimatedSection animation="slide-right" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center">
                 <Flame className="h-6 w-6 text-secondary" />
@@ -159,34 +170,40 @@ const Servicios = () => {
             <p className="text-muted-foreground max-w-2xl">
               Proyectos de gas natural y GLP según normativa vigente, con técnicos certificados.
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {gasServices.map((service) => (
-              <div key={service.title} className="p-8 rounded-2xl bg-card border border-border hover:border-secondary/30 hover:shadow-hover transition-all">
-                <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                  <service.icon className="h-6 w-6 text-secondary" />
+            {gasServices.map((service, index) => (
+              <AnimatedSection key={service.title} animation="scale" delay={index * 0.15} duration={0.5}>
+                <div className="p-8 rounded-2xl bg-card border border-border hover:border-secondary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                  <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                    <service.icon className="h-6 w-6 text-secondary group-hover:text-secondary-foreground transition-colors duration-300" />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-2 group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <ul className="space-y-2">
+                    {service.items.map((item, i) => (
+                      <li 
+                        key={item} 
+                        className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300"
+                        style={{ transitionDelay: `${i * 50}ms` }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-150 transition-transform duration-300" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-foreground mb-2">{service.title}</h3>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* Certification Services */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="mb-12">
+          <AnimatedSection animation="slide-left" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 <FileCheck className="h-6 w-6 text-primary" />
@@ -198,25 +215,31 @@ const Servicios = () => {
             <p className="text-muted-foreground max-w-2xl">
               Tramitación de certificados SEC y auditorías técnicas profesionales.
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {certificationServices.map((service) => (
-              <div key={service.title} className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-hover transition-all">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <service.icon className="h-6 w-6 text-primary" />
+            {certificationServices.map((service, index) => (
+              <AnimatedSection key={service.title} animation="fade-up" delay={index * 0.15} duration={0.5}>
+                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <service.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <ul className="space-y-2">
+                    {service.items.map((item, i) => (
+                      <li 
+                        key={item} 
+                        className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300"
+                        style={{ transitionDelay: `${i * 50}ms` }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary group-hover:scale-150 transition-transform duration-300" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-foreground mb-2">{service.title}</h3>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
