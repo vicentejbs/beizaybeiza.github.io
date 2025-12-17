@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Zap, Flame, ShieldCheck, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const services = [
   "Diseño de Proyectos",
@@ -12,9 +12,23 @@ const services = [
   "Regularizaciones SEC",
 ];
 
+const typewriterWords = [
+  "ILUMINACIÓN",
+  "DISEÑO",
+  "MANTENIMIENTOS",
+  "PROYECTOS",
+  "REGULARIZACIONES",
+  "CERTIFICACIONES",
+  "AUDITORÍAS",
+];
+
 export const Hero = () => {
   const [counts, setCounts] = useState({ years: 0, percent: 0, projects: 0 });
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
+  // Counter animation
   useEffect(() => {
     const duration = 2000;
     const steps = 60;
@@ -37,6 +51,35 @@ export const Hero = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  // Typewriter effect
+  useEffect(() => {
+    const currentWord = typewriterWords[currentWordIndex];
+    const typeSpeed = isDeleting ? 50 : 100;
+    const pauseTime = 2000;
+
+    const handleTyping = () => {
+      if (!isDeleting) {
+        if (displayText.length < currentWord.length) {
+          setDisplayText(currentWord.slice(0, displayText.length + 1));
+        } else {
+          setTimeout(() => setIsDeleting(true), pauseTime);
+          return;
+        }
+      } else {
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % typewriterWords.length);
+          return;
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typeSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentWordIndex]);
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
@@ -74,11 +117,19 @@ export const Hero = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-hero mb-6 animate-slide-up">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-hero mb-2 animate-slide-up">
             Instalaciones{" "}
             <span className="text-gradient-gold">Eléctricas</span> y{" "}
             <span className="text-gradient">Gas</span>
           </h1>
+
+          {/* Typewriter Effect */}
+          <div className="h-16 md:h-20 mb-6 animate-slide-up" style={{ animationDelay: "0.05s" }}>
+            <span className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-secondary">
+              {displayText}
+              <span className="inline-block w-1 h-8 md:h-10 bg-secondary ml-1 animate-pulse" />
+            </span>
+          </div>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-hero-muted mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
