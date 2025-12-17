@@ -138,6 +138,34 @@
   .animate-scale-in {
     animation: scaleIn 0.5s ease-out forwards;
   }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-hover;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(0 75% 45% / 0.3);
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-hover;
+  }
 }
 
 @keyframes fadeIn {
@@ -167,8 +195,69 @@
   }
 }
 
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px hsl(0 75% 45% / 0.3);
+  }
+  to {
+    box-shadow: 0 0 25px hsl(0 75% 45% / 0.5);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .hero-pattern {
   background-image: 
     radial-gradient(circle at 20% 50%, hsl(0 75% 45% / 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, hsl(45 100% 50% / 0.1) 0%, transparent 50%);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Counter animation */
+.counter-animate {
+  @apply tabular-nums;
 }
