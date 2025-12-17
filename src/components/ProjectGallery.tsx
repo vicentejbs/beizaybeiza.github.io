@@ -51,7 +51,7 @@ export const ProjectGallery = () => {
 
         <div className="text-center mt-8">
           <a
-            href="https://www.instagram.com/ingenieriabeiza"
+            href="https://www.instagram.com/ingenieriabeiza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
