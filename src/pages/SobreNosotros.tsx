@@ -6,7 +6,7 @@ import fotoDiego from "@/assets/foto-diego.jpg";
 import fotoEnrique from "@/assets/foto-enrique.jpg";
 import fotoVicente from "@/assets/foto-vicente.jpg";
 import heroNosotros from "@/assets/hero-nosotros.png";
-import secLogo from "@/assets/sec-logo.png";
+import secLogo from "@/assets/logo-beiza.jpg";
 
 const team = [
   {

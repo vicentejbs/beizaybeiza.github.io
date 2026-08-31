@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Linkedin } from "lucide-react";
 import logo from "@/assets/logo-beiza.jpg";
-import secLogo from "@/assets/sec-logo.png";
+import secLogo from "@/assets/logo-beiza.jpg";
 
 export const Footer = () => {
   return (

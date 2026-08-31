@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Zap, Flame, ShieldCheck, ArrowRight } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
 import heroInicio from "@/assets/hero-inicio.png";
-import secLogo from "@/assets/sec-logo.png";
+import secLogo from "@/assets/logo-beiza.jpg";
 
 const services = [
   "Diseño de Proyectos",
