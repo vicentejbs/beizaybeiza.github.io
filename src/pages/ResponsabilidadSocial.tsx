@@ -3,7 +3,7 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { AnimatedSection } from "@/hooks/useScrollAnimation";
 import { Heart, Users, Leaf, GraduationCap, Recycle, Briefcase } from "lucide-react";
 import heroRse from "@/assets/hero-rse.png";
-import rseCompromiso from "@/assets/rse-compromiso.png";
+import rseCompromiso from "@/assets/trabajo-clima.jpg";
 
 const initiatives = [
   {
