@@ -22,7 +22,7 @@ import trabajoTablero from "@/assets/trabajo-tablero.jpg";
 import trabajoMedidor from "@/assets/trabajo-medidor.jpg";
 import trabajoTecnico from "@/assets/trabajo-tecnico.jpg";
 import trabajoClima from "@/assets/trabajo-clima.jpg";
-import auditoriaImg from "@/assets/auditoria-tecnica-pro.png";
+import auditoriaImg from "@/assets/trabajo-tecnico.jpg";
 import trabajoTransformador from "@/assets/trabajo-transformador.jpg";
 import trabajoPoste from "@/assets/trabajo-poste.jpg";
 
