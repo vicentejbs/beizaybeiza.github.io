@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Linkedin } from "lucide-react";
 import logo from "@/assets/logo-beiza.jpg";
+import secLogo from "@/assets/sec-logo.png";
 
 export const Footer = () => {
   return (
@@ -10,11 +11,14 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo & Description */}
           <div className="space-y-4">
-            <img src={logo} alt="Beiza y Beiza" className="h-20 w-auto bg-background rounded-lg p-2" />
+            <img src={logo} alt="Ingeniería Beiza y Beiza" className="h-20 w-auto bg-background rounded-lg p-2" />
             <p className="text-background/70 text-sm leading-relaxed">
               Soluciones integrales en instalaciones eléctricas y de gas. Más de 20 años de experiencia en la Región
               Metropolitana.
             </p>
+            <div className="pt-4">
+              <img src={secLogo} alt="Autorizado SEC" className="h-16 w-auto bg-white rounded-md p-1" />
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -105,7 +109,7 @@ export const Footer = () => {
       <div className="border-t border-background/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-background/50">
-            <p>© 2025 Beiza y Beiza Ingeniería. Todos los derechos reservados.</p>
+            <p>© 2025 Ingeniería Beiza y Beiza. Todos los derechos reservados.</p>
             <p>Región Metropolitana, Chile</p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,15 +14,30 @@ const navItems = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-black/30 backdrop-blur-md border-b border-white/10"
+        : "bg-background/95 backdrop-blur-sm border-b border-border"
+        }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Beiza y Beiza" className="h-14 w-auto" />
+            <img src={logo} alt="Ingeniería Beiza y Beiza" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,11 +46,10 @@ export const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`px-4 py-2 text-sm font-medium transition-colors rounded-md hover:bg-muted ${
-                  location.pathname === item.path
-                    ? "text-primary font-semibold"
-                    : "text-foreground/80"
-                }`}
+                className={`px-4 py-2 text-sm font-medium transition-colors rounded-md hover:bg-white/10 ${location.pathname === item.path
+                  ? isScrolled ? "text-secondary font-semibold" : "text-primary font-semibold"
+                  : isScrolled ? "text-white/90" : "text-foreground/80"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -44,15 +58,9 @@ export const Header = () => {
 
           {/* CTA & Phone */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="tel:+56978617592"
-              className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              +56 9 7861 7592
-            </a>
+
             <Link to="/contacto">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+              <Button className="animate-color-flow font-semibold">
                 Contrata Nuestros Servicios
               </Button>
             </Link>
@@ -76,25 +84,18 @@ export const Header = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block px-4 py-3 text-sm font-medium transition-colors ${
-                  location.pathname === item.path
-                    ? "text-primary bg-muted"
-                    : "text-foreground/80 hover:bg-muted"
-                }`}
+                className={`block px-4 py-3 text-sm font-medium transition-colors ${location.pathname === item.path
+                  ? "text-primary bg-muted"
+                  : "text-foreground/80 hover:bg-muted"
+                  }`}
               >
                 {item.name}
               </Link>
             ))}
             <div className="mt-4 px-4 space-y-3">
-              <a
-                href="tel:+56978617592"
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground"
-              >
-                <Phone className="h-4 w-4" />
-                +56 9 7861 7592
-              </a>
+
               <Link to="/contacto" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+                <Button className="w-full animate-color-flow font-semibold">
                   Contrata Nuestros Servicios
                 </Button>
               </Link>

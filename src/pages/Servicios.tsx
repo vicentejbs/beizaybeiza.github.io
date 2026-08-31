@@ -1,18 +1,19 @@
 import { Layout } from "@/components/Layout";
 import { ContactCTA } from "@/components/ContactCTA";
 import { AnimatedSection } from "@/hooks/useScrollAnimation";
-import { 
-  Zap, 
-  Flame, 
-  ShieldCheck, 
-  Wrench, 
-  FileCheck, 
+import {
+  Zap,
+  Flame,
+  ShieldCheck,
+  Wrench,
+  FileCheck,
   Users,
   Lightbulb,
   Settings,
   Battery,
   Sun
 } from "lucide-react";
+import heroServicios from "@/assets/hero-servicios.png";
 
 const electricServices = [
   {
@@ -71,8 +72,8 @@ const certificationServices = [
   },
   {
     icon: Users,
-    title: "Ingreso TC6",
-    description: "Tramitación de certificados TC6 ante la Superintendencia de Electricidad y Combustibles.",
+    title: "Ingreso TC5/TC6",
+    description: "Tramitación de certificados TC5 y TC6 ante la Superintendencia de Electricidad y Combustibles.",
     items: ["Instalaciones de gas", "Documentación SEC", "Seguimiento", "Aprobación"]
   },
   {
@@ -87,10 +88,17 @@ const Servicios = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+      <section className="py-12 relative overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroServicios})` }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-1/4 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
-          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-10 left-1/4 w-72 h-72 bg-primary blur-3xl animate-pulse-soft" />
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
@@ -99,8 +107,8 @@ const Servicios = () => {
               Soluciones Integrales en Electricidad y Gas
             </h1>
             <p className="text-xl text-hero-muted animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              Ofrecemos una amplia gama de servicios técnicos especializados, 
-              desde instalaciones residenciales hasta proyectos industriales complejos. 
+              Ofrecemos una amplia gama de servicios técnicos especializados,
+              desde instalaciones residenciales hasta proyectos industriales complejos.
               Todos certificados y según normativa SEC vigente.
             </p>
           </div>
@@ -108,11 +116,11 @@ const Servicios = () => {
       </section>
 
       {/* Electric Services */}
-      <section className="py-20 bg-background overflow-hidden">
+      <section className="py-16 bg-mesh-light overflow-hidden">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="slide-left" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary/10 flex items-center justify-center">
                 <Zap className="h-6 w-6 text-primary" />
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
@@ -127,9 +135,9 @@ const Servicios = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {electricServices.map((service, index) => (
               <AnimatedSection key={service.title} animation="fade-up" delay={index * 0.1} duration={0.5}>
-                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                <div className="p-8 bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                       <service.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                     </div>
                     <div>
@@ -137,9 +145,9 @@ const Servicios = () => {
                       <p className="text-muted-foreground mb-4">{service.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {service.items.map((item, i) => (
-                          <span 
-                            key={item} 
-                            className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground group-hover:bg-primary/10 group-hover:text-foreground transition-all duration-300"
+                          <span
+                            key={item}
+                            className="px-3 py-1 bg-muted text-sm text-muted-foreground group-hover:bg-primary/10 group-hover:text-foreground transition-all duration-300"
                             style={{ transitionDelay: `${i * 50}ms` }}
                           >
                             {item}
@@ -156,11 +164,11 @@ const Servicios = () => {
       </section>
 
       {/* Gas Services */}
-      <section className="py-20 bg-muted overflow-hidden">
+      <section className="py-16 bg-muted bg-grid-pattern overflow-hidden relative">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="slide-right" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center">
+              <div className="w-12 h-12 bg-secondary/20 flex items-center justify-center">
                 <Flame className="h-6 w-6 text-secondary" />
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
@@ -175,20 +183,20 @@ const Servicios = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {gasServices.map((service, index) => (
               <AnimatedSection key={service.title} animation="scale" delay={index * 0.15} duration={0.5}>
-                <div className="p-8 rounded-2xl bg-card border border-border hover:border-secondary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
-                  <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                <div className="p-8 bg-card border border-border hover:border-secondary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                  <div className="w-12 h-12 bg-secondary/20 flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
                     <service.icon className="h-6 w-6 text-secondary group-hover:text-secondary-foreground transition-colors duration-300" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-2 group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
                   <p className="text-muted-foreground mb-4">{service.description}</p>
                   <ul className="space-y-2">
                     {service.items.map((item, i) => (
-                      <li 
-                        key={item} 
+                      <li
+                        key={item}
                         className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300"
                         style={{ transitionDelay: `${i * 50}ms` }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-150 transition-transform duration-300" />
+                        <span className="w-1.5 h-1.5 bg-secondary group-hover:scale-150 transition-transform duration-300" />
                         {item}
                       </li>
                     ))}
@@ -201,11 +209,11 @@ const Servicios = () => {
       </section>
 
       {/* Certification Services */}
-      <section className="py-20 bg-background overflow-hidden">
+      <section className="py-12 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="slide-left" className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary/10 flex items-center justify-center">
                 <FileCheck className="h-6 w-6 text-primary" />
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
@@ -220,20 +228,20 @@ const Servicios = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {certificationServices.map((service, index) => (
               <AnimatedSection key={service.title} animation="fade-up" delay={index * 0.15} duration={0.5}>
-                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <div className="p-8 bg-card border border-border hover:border-primary/50 hover:shadow-hover transition-all duration-500 hover:-translate-y-2 h-full group">
+                  <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                     <service.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
                   <p className="text-muted-foreground mb-4">{service.description}</p>
                   <ul className="space-y-2">
                     {service.items.map((item, i) => (
-                      <li 
-                        key={item} 
+                      <li
+                        key={item}
                         className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300"
                         style={{ transitionDelay: `${i * 50}ms` }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary group-hover:scale-150 transition-transform duration-300" />
+                        <span className="w-1.5 h-1.5 bg-primary group-hover:scale-150 transition-transform duration-300" />
                         {item}
                       </li>
                     ))}

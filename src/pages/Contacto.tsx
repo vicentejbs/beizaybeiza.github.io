@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, MessageCircle, Send, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import heroContacto from "@/assets/hero-contacto.png";
 
 const contactInfo = [
   {
@@ -54,15 +55,40 @@ const Contacto = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "¡Mensaje enviado!",
-      description: "Nos pondremos en contacto contigo pronto.",
-    });
-    
-    setFormData({ nombre: "", email: "", telefono: "", servicio: "", mensaje: "" });
+    console.log('=== FORM SUBMIT ===', formData);
+
+    try {
+      const response = await fetch('/contact-form.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "¡Mensaje enviado!",
+          description: result.message || "Nos pondremos en contacto contigo pronto.",
+        });
+        setFormData({ nombre: "", email: "", telefono: "", servicio: "", mensaje: "" });
+      } else {
+        toast({
+          title: "Error al enviar",
+          description: result.message || "Por favor intente nuevamente.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error de conexión",
+        description: "No se pudo enviar el mensaje. Por favor intente nuevamente o contáctenos por WhatsApp.",
+        variant: "destructive",
+      });
+    }
+
     setIsSubmitting(false);
   };
 
@@ -73,7 +99,14 @@ const Contacto = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+      <section className="py-20 relative overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroContacto})` }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-1/4 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
           <div className="absolute bottom-10 left-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
@@ -85,7 +118,7 @@ const Contacto = () => {
               Contáctanos
             </h1>
             <p className="text-xl text-hero-muted animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              Estamos listos para ayudarte con tu próximo proyecto. 
+              Estamos listos para ayudarte con tu próximo proyecto.
               Solicita una cotización sin compromiso o agenda una visita técnica.
             </p>
           </div>
@@ -93,7 +126,7 @@ const Contacto = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-background overflow-hidden">
+      <section className="py-24 bg-mesh-light overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Info */}
@@ -105,7 +138,7 @@ const Contacto = () => {
               <div className="space-y-4 mb-10">
                 {contactInfo.map((item, index) => {
                   const Content = (
-                    <div className="flex items-start gap-4 p-4 rounded-xl bg-muted hover:bg-muted/80 transition-all duration-300 hover:-translate-x-1 group">
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:bg-background/80 transition-all duration-300 hover:-translate-x-1 group shadow-sm">
                       <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                         <item.icon className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                       </div>
@@ -145,7 +178,7 @@ const Contacto = () => {
 
             {/* Contact Form */}
             <AnimatedSection animation="slide-right" duration={0.6}>
-              <div className="p-8 rounded-2xl bg-card border border-border hover:shadow-hover transition-all duration-500">
+              <div className="p-8 rounded-2xl bg-card border border-border shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500">
                 <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
                   Solicita un Presupuesto
                 </h2>

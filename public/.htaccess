@@ -1,0 +1,16 @@
+# Enable RewriteEngine
+RewriteEngine On
+
+# Set the base directory
+RewriteBase /
+
+# If the request is for a real file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise, redirect all requests to index.html (for React Router)
+RewriteRule ^(?!.*\.(php|jpg|jpeg|png|gif|svg|css|js|ico|webp|woff|woff2|ttf|eot)).*$ /index.html [L,QSA]
+
+# Allow PHP files to be executed normally
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteRule .* - [L]

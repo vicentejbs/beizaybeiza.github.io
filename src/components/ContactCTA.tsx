@@ -5,11 +5,11 @@ import { AnimatedSection } from "@/hooks/useScrollAnimation";
 
 export const ContactCTA = () => {
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+    <section className="py-14 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(350, 85%, 20%) 0%, hsl(0, 0%, 10%) 100%)' }}>
       {/* Animated background */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-10 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-10 left-1/4 w-64 h-64 bg-primary blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-secondary blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -20,7 +20,7 @@ export const ContactCTA = () => {
           <p className="text-xl text-hero-muted mb-8">
             Contáctanos hoy y obtén una cotización personalizada sin compromiso.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://wa.me/56978617592?text=Hola,%20me%20interesa%20solicitar%20información%20sobre%20sus%20servicios"

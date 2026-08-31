@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Zap, Flame, ShieldCheck, ArrowRight } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
+import heroInicio from "@/assets/hero-inicio.png";
+import secLogo from "@/assets/sec-logo.png";
 
 const services = [
   "Diseño de Proyectos",
@@ -82,12 +84,20 @@ export const Hero = () => {
   }, [displayText, isDeleting, currentWordIndex]);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(220, 20%, 12%) 0%, hsl(220, 18%, 18%) 100%)' }}>
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroInicio})` }}
+      />
+      {/* Dark Overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/30 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "0.75s" }} />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/30 blur-3xl animate-pulse-soft" style={{ animationDelay: "0.75s" }} />
       </div>
 
       {/* Floating particles */}
@@ -95,7 +105,7 @@ export const Hero = () => {
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-secondary/30 rounded-full animate-float"
+            className="absolute w-2 h-2 bg-secondary/30 animate-float"
             style={{
               left: `${15 + i * 15}%`,
               top: `${20 + (i % 3) * 25}%`,
@@ -106,14 +116,21 @@ export const Hero = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-4xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/30 border border-primary/50 mb-8 animate-fade-in hover:bg-primary/40 transition-colors cursor-default">
-            <ShieldCheck className="h-4 w-4 text-secondary animate-pulse-soft" />
-            <span className="text-sm font-medium text-hero">
-              Certificados SEC | Región Metropolitana
-            </span>
+          <div className="mb-8 animate-fade-in flex items-center gap-4">
+            <img
+              src={secLogo}
+              alt="Autorizado SEC"
+              className="h-16 w-auto object-contain bg-white/5 rounded-lg p-1 border border-white/10"
+            />
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/30 border border-primary/50 hover:bg-primary/40 transition-colors cursor-default rounded-md">
+              <ShieldCheck className="h-4 w-4 text-secondary animate-pulse-soft" />
+              <span className="text-sm font-medium text-hero">
+                Región Metropolitana
+              </span>
+            </div>
           </div>
 
           {/* Main Heading */}
@@ -133,7 +150,7 @@ export const Hero = () => {
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-hero-muted mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            Soluciones integrales para proyectos residenciales, comerciales e industriales. 
+            Soluciones integrales para proyectos residenciales, comerciales e industriales.
             Garantizamos calidad, seguridad y cumplimiento normativo.
           </p>
 
@@ -142,7 +159,7 @@ export const Hero = () => {
             {services.map((service, index) => (
               <span
                 key={service}
-                className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-hero-muted hover:bg-white/20 hover:border-white/40 transition-all duration-300 cursor-default"
+                className="px-4 py-2 bg-white/10 border border-white/20 text-sm text-hero-muted hover:bg-white/20 hover:border-white/40 transition-all duration-300 cursor-default"
                 style={{ animationDelay: `${0.3 + index * 0.05}s` }}
               >
                 {service}
